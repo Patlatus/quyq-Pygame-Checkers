@@ -61,6 +61,8 @@ class Game:
 	The main game control.
 	"""
 
+	run = True
+
 	def __init__(self):
 		self.graphics = Graphics()
 		self.board = Board()
@@ -123,17 +125,25 @@ class Game:
 		self.graphics.update_display(self.board, self.selected_legal_moves, self.selected_piece)
 
 	def terminate_game(self):
+
+		print(Game.run)
+		Game.run = False
+		print(Game.run)
 		"""Quits the program and ends the game."""
-		pygame.quit()
-		sys.exit
+		#pygame.quit()
+		#sys.exit()
 
 	def main(self):
 		""""This executes the game and controls its flow."""
 		self.setup()
 
-		while True: # main game loop
+		while Game.run: # main game loop
+			print("Loop: ", Game.run)
 			self.event_loop()
 			self.update()
+
+		pygame.quit()
+		sys.exit()
 
 	def end_turn(self):
 		"""
